@@ -10,7 +10,7 @@ class CurrentWeatherController:
         temperature = ''
         pressure = ''
 
-        data = self.model.get_data()
+        data = self.model.get_api_data()
 
         for key, value in data.items():
             if key == 'stacja':
@@ -25,7 +25,11 @@ class CurrentWeatherController:
     def prepare_data(self):
         location, temperature, pressure, = self.prepare_weather_data()
         current_time = self.prepare_time_data().strftime('%H:%M:%S')
-        return location, temperature, pressure, current_time
+        avg_temp = self.prepare_avg_data()
+        return location, temperature, pressure, current_time, avg_temp
 
     def prepare_time_data(self):
         return datetime.now().time()
+
+    def prepare_avg_data(self):
+        return self.model.get_avg_temp()

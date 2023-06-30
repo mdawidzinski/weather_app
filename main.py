@@ -7,7 +7,7 @@ import sys
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    model = CurrentWeatherModel()
+    model = CurrentWeatherModel('weather_data.xlsx')
     controller = CurrentWeatherController(model)
     view = WeatherView(controller)
     view.show()
