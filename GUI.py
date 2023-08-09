@@ -1,5 +1,7 @@
 from PyQt5 import uic
+from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMainWindow
+from datetime import datetime
 
 
 class WeatherAppGui(QMainWindow):
@@ -10,7 +12,12 @@ class WeatherAppGui(QMainWindow):
 
         uic.loadUi("weather_app.ui", self)
 
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_date_time)
+        self.timer.start(1000)
+
         self.update_gui_from_api()
+        self.update_date_time()
 
     def update_gui_from_api(self) -> None:
         """Update GUI with the data from API"""
@@ -22,4 +29,11 @@ class WeatherAppGui(QMainWindow):
         self.pressure_label.setText(f"Pressure: {pressure} hPa")
         self.humidity_label.setText(f"Humidity: {humidity}%")
         self.wind_label.setText(f"Wind: {wind} km/h")
+
+    def update_date_time(self):
+        today = datetime.now().strftime("%d. %B %Y")
+        current_time = QTime.currentTime()
+
+        self.date_label.setText(today)
+        self.time_label.setText(current_time.toString("hh:mm:ss"))
 
