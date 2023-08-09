@@ -14,7 +14,7 @@ class WeatherAppGui(QMainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_date_time)
-        self.timer.start(1000)
+        self.timer.start(1000)  # refresh timer every 1 second
 
         self.update_gui_from_api()
         self.update_date_time()
@@ -30,7 +30,8 @@ class WeatherAppGui(QMainWindow):
         self.humidity_label.setText(f"Humidity: {humidity}%")
         self.wind_label.setText(f"Wind: {wind} km/h")
 
-    def update_date_time(self):
+    def update_date_time(self) -> None:
+        """Update GUI with date and time"""
         today = datetime.now().strftime("%d. %B %Y")
         current_time = QTime.currentTime()
 
