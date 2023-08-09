@@ -61,7 +61,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="temparature_label">
+      <widget class="QLabel" name="temperature_label">
        <property name="text">
         <string>Temparature</string>
        </property>
@@ -75,9 +75,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="precipitation_label">
+      <widget class="QLabel" name="humidity_label">
        <property name="text">
-        <string>Precipitation</string>
+        <string>Humidity</string>
        </property>
       </widget>
      </item>
