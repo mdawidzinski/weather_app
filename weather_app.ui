@@ -138,6 +138,11 @@
        </item>
        <item>
         <property name="text">
+         <string>Precipitation</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Wind speed</string>
         </property>
        </item>
@@ -146,7 +151,7 @@
      <item row="1" column="2">
       <widget class="QPushButton" name="show_button">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="maximumSize">
         <size>
