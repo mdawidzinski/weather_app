@@ -10,3 +10,16 @@ class WeatherAppGui(QMainWindow):
 
         uic.loadUi("weather_app.ui", self)
 
+        self.update_gui_from_api()
+
+    def update_gui_from_api(self) -> None:
+        """Update GUI with the data from API"""
+        city, temperature, pressure, humidity, wind = self.controller.prepare_weather_data()
+
+        symbol = "\u00b0"
+        self.city_label.setText(city)
+        self.temperature_label.setText(f"Temperature: {temperature}{symbol}C")
+        self.pressure_label.setText(f"Pressure: {pressure} hPa")
+        self.humidity_label.setText(f"Humidity: {humidity}%")
+        self.wind_label.setText(f"Wind: {wind} km/h")
+
