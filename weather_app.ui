@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>713</width>
-    <height>558</height>
+    <width>717</width>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,20 +95,13 @@
      <rect>
       <x>120</x>
       <y>40</y>
-      <width>391</width>
+      <width>461</width>
       <height>80</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignBottom">
-      <widget class="QLabel" name="graph_label">
-       <property name="text">
-        <string>Show Graphs</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
-      <widget class="QComboBox" name="comboBox_1">
+      <widget class="QComboBox" name="graph_combobox">
        <item>
         <property name="text">
          <string>Base</string>
@@ -121,8 +114,15 @@
        </item>
       </widget>
      </item>
+     <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+      <widget class="QLabel" name="graph_label">
+       <property name="text">
+        <string>Show Graphs</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBox_2">
+      <widget class="QComboBox" name="data_combobox">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -148,7 +148,14 @@
        </item>
       </widget>
      </item>
-     <item row="1" column="2">
+     <item row="0" column="1" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+      <widget class="QLabel" name="data_label">
+       <property name="text">
+        <string>Data</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
       <widget class="QPushButton" name="show_button">
        <property name="enabled">
         <bool>true</bool>
@@ -164,14 +171,78 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1" alignment="Qt::AlignHCenter|Qt::AlignBottom">
-      <widget class="QLabel" name="data_label">
+     <item row="1" column="2">
+      <widget class="QComboBox" name="period_combobox">
+       <item>
+        <property name="text">
+         <string>This month</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="2" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+      <widget class="QLabel" name="data_range_label">
        <property name="text">
-        <string>Data</string>
+        <string>Choose Data Range</string>
        </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QScrollArea" name="scroll_area">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>711</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>709</width>
+       <height>429</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="zoom_in_b">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>60</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>zoom_in</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoom_out_b">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>zoom_out</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -179,7 +250,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>713</width>
+     <width>717</width>
      <height>21</height>
     </rect>
    </property>
