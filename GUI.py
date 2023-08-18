@@ -19,6 +19,9 @@ class WeatherAppGui(QMainWindow):
         self.update_gui_from_api()
         self.update_date_time()
 
+        self.zoom_in_b.clicked.connect(self.zoom_in)
+        self.zoom_out_b.clicked.connect(self.zoom_out())
+
     def update_gui_from_api(self) -> None:
         """Update GUI with the data from API"""
         city, temperature, pressure, humidity, wind = self.controller.prepare_weather_data()
