@@ -38,3 +38,14 @@ class WeatherAppGui(QMainWindow):
         self.date_label.setText(today)
         self.time_label.setText(current_time.toString("hh:mm:ss"))
 
+    def zoom_in(self):
+        """Allows zoom in graph"""
+        ax = self.figure.gca()
+        ax.set_xlim(ax.get_xlim()[0] * 0.9, ax.get_xlim()[1] * 0.9)
+        self.canvas.draw()
+
+    def zoom_out(self):
+        """Allows zoom in graph"""
+        ax = self.figure.gca()
+        ax.set_xlim(ax.get_xlim()[0] * 1.1, ax.get_xlim()[1] * 1.1)
+        self.canvas.draw()
