@@ -2,6 +2,9 @@ from PyQt5 import uic
 from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMainWindow
 from datetime import datetime
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+from typing import Tuple
 
 
 class WeatherAppGui(QMainWindow):
@@ -19,8 +22,14 @@ class WeatherAppGui(QMainWindow):
         self.update_gui_from_api()
         self.update_date_time()
 
+        self.figure = Figure()
+        self.canvas = FigureCanvas(self.figure)
+
+        self.scroll_area.setWidget(self.canvas)
+
+        self.show_button.clicked.connect(self.show_graph)
         self.zoom_in_b.clicked.connect(self.zoom_in)
-        self.zoom_out_b.clicked.connect(self.zoom_out())
+        self.zoom_out_b.clicked.connect(self.zoom_out)
 
     def update_gui_from_api(self) -> None:
         """Update GUI with the data from API"""
@@ -41,14 +50,41 @@ class WeatherAppGui(QMainWindow):
         self.date_label.setText(today)
         self.time_label.setText(current_time.toString("hh:mm:ss"))
 
-    def zoom_in(self):
+    def zoom_in(self) -> None:
         """Allows zoom in graph"""
         ax = self.figure.gca()
-        ax.set_xlim(ax.get_xlim()[0] * 0.9, ax.get_xlim()[1] * 0.9)
+        xmin, xmax = ax.get_xlim()
+        x_range = xmax - xmin
+        new_xmin = xmin + x_range * 0.1
+        new_xmax = xmax - x_range * 0.1
+        ax.set_xlim(new_xmin, new_xmax)
         self.canvas.draw()
 
-    def zoom_out(self):
-        """Allows zoom in graph"""
+    def zoom_out(self) -> None:
+        """Allows zoom out graph"""
         ax = self.figure.gca()
-        ax.set_xlim(ax.get_xlim()[0] * 1.1, ax.get_xlim()[1] * 1.1)
+        xmin, xmax = ax.get_xlim()
+        x_range = xmax - xmin
+        new_xmin = xmin - x_range * 0.1
+        new_xmax = xmax + x_range * 0.1
+        ax.set_xlim(new_xmin, new_xmax)
         self.canvas.draw()
+
+    def get_graph_data(self) -> Tuple[str, str, str]:
+        """Collect user-selected graph data from GUI"""
+        graph = self.graph_combobox.currentText()
+        data_type = self.data_combobox.currentText()
+        period = self.period_combobox.currentText()
+
+        return graph, data_type, period
+
+    def show_graph(self) -> None:
+        """Method responsible for graph display"""
+        graph, data_type, period = self.get_graph_data()
+
+        self.controller.set_gui_data(graph, data_type, period)
+
+        self.controller.plot_data(self.figure, self.canvas)
+
+        self.zoom_out_b.setEnabled(True)
+        self.zoom_in_b.setEnabled(True)
