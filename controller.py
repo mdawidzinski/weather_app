@@ -1,11 +1,9 @@
-from datetime import datetime
-
-
 class CurrentWeatherController:
     def __init__(self, model):
         self.model = model
 
     def prepare_weather_data(self):
+        """Method responsible for preparing data from API to display in GUI"""
         city = ""
         temperature = ""
         pressure = ""
@@ -28,14 +26,28 @@ class CurrentWeatherController:
 
         return city, temperature, pressure, humidity, wind
 
-    def prepare_data(self):
-        location, temperature, pressure, = self.prepare_weather_data()
-        current_time = self.prepare_time_data().strftime('%H:%M:%S')
-        avg_temp = self.prepare_avg_data()
-        return location, temperature, pressure, current_time, avg_temp
+    def set_gui_data(self, graph, data_type, period):
+        """Method responsible for send information about graph form GUI to model"""
+        self.model.graph = graph
+        self.model.data_type = data_type
+        self.model.period = period
 
-    def prepare_time_data(self):
-        return datetime.now().time()
+    def plot_data(self, figure, canvas):
+        """Method responsible for generating graph using data from model"""
+        data, data_type = self.model.prepare_data()
 
-    def prepare_avg_data(self):
-        return self.model.get_avg_temp()
+        figure.clear()
+        ax = figure.add_subplot(111)
+
+        x = data['date']
+        y = data[data_type]
+
+        ax.plot(x, y, marker='o')
+        ax.set_xlabel('Date')
+        ax.set_ylabel(data_type)
+        ax.set_title(f'{data_type} Over Time')
+        ax.tick_params(axis='x', rotation=45)
+
+        figure.subplots_adjust(left=0.1, bottom=0.24, right=0.97, top=0.9)
+
+        return canvas.draw()
