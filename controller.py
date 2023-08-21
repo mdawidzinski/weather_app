@@ -1,8 +1,13 @@
+from typing import Tuple, Any
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+
+
 class CurrentWeatherController:
     def __init__(self, model):
         self.model = model
 
-    def prepare_weather_data(self):
+    def prepare_weather_data(self) -> Tuple[str, str, str, str, str]:
         """Method responsible for preparing data from API to display in GUI"""
         city = ""
         temperature = ""
@@ -26,13 +31,13 @@ class CurrentWeatherController:
 
         return city, temperature, pressure, humidity, wind
 
-    def set_gui_data(self, graph, data_type, period):
+    def set_gui_data(self, graph, data_type, period) -> None:
         """Method responsible for send information about graph form GUI to model"""
         self.model.graph = graph
         self.model.data_type = data_type
         self.model.period = period
 
-    def plot_data(self, figure, canvas):
+    def plot_data(self, figure: Figure, canvas: FigureCanvas) -> Any:
         """Method responsible for generating graph using data from model"""
         data, data_type = self.model.prepare_data()
 
