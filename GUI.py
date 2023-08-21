@@ -43,7 +43,7 @@ class WeatherAppGui(QMainWindow):
         self.wind_label.setText(f"Wind: {wind} km/h")
 
     def update_date_time(self) -> None:
-        """Update GUI with date and time"""
+        """Update GUI with current date and time"""
         today = datetime.now().strftime("%d. %B %Y")
         current_time = QTime.currentTime()
 
