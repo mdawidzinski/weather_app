@@ -44,7 +44,7 @@ class CurrentWeatherController:
         figure.clear()
         ax = figure.add_subplot(111)
 
-        x = data['date']
+        x = data['Date']
         y = data[data_type]
 
         ax.plot(x, y, marker='o')

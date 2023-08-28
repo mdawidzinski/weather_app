@@ -27,10 +27,10 @@ class CurrentWeatherModel:
         weather_data = self.get_excel_data()
 
         last_row = weather_data.iloc[-1]
-        last_day = last_row["date"]
+        last_day = last_row["Date"]
 
         first_day_of_last_month = last_day.replace(day=1)
 
-        filtered_data = weather_data[weather_data['date'].between(first_day_of_last_month, last_day)]
+        filtered_data = weather_data[weather_data['Date'].between(first_day_of_last_month, last_day)]
 
         return filtered_data, self.data_type
