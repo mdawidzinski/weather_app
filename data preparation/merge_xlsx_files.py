@@ -13,6 +13,7 @@ class DataMerge:
             self.drop_columns()
             self.rename_columns()
             self.convert_to_numeric()
+            self.convert_to_date()
             self.save_df_to_xlsx()
         except Exception as e:
             print(f"An error occurred: {e}")
@@ -23,7 +24,7 @@ class DataMerge:
             dfs = [pd.read_excel(file) for file in self.files_to_merge]
             self.df = pd.concat(dfs)
         except Exception as e:
-            raise Exception(f"Error occurred during loading or concatenating file: {e}")
+            raise Exception(f"Error occurred during loading or concatenating files: {e}")
 
     def drop_columns(self) -> None:
         """Drop unnecessary columns"""
@@ -40,7 +41,7 @@ class DataMerge:
         try:
             self.df = self.df.rename(columns=column_to_rename)
         except Exception as e:
-            raise Exception(f"Error occurred during renaming columns file: {e}")
+            raise Exception(f"Error occurred during renaming columns: {e}")
 
     def convert_to_numeric(self) -> None:
         """Convert data to numerical values"""
@@ -49,7 +50,14 @@ class DataMerge:
             for data in convert_to_numeric:
                 self.df[data] = pd.to_numeric(self.df[data])
         except Exception as e:
-            raise Exception(f"Error occurred during converting columns to numeric file: {e}")
+            raise Exception(f"Error occurred during converting columns to numeric: {e}")
+
+    def convert_to_date(self):
+        """Convert Date column to date"""
+        try:
+            self.df["Date"] = pd.to_datetime(self.df["Date"]).dt.date
+        except Exception as e:
+            raise Exception(f"Error occurred during converting Date to date type: {e}")
 
     def save_df_to_xlsx(self) -> None:
         """Save dataframe to xlsx"""
