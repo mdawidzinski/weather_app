@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
+    <width>956</width>
     <height>586</height>
    </rect>
   </property>
@@ -239,18 +239,73 @@
      <string>zoom_out</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>717</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>120</y>
+      <width>160</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="max_value_label">
+       <property name="text">
+        <string>max_value</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="max_value_date_label">
+       <property name="text">
+        <string>max_value_date</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="min_value_label">
+       <property name="text">
+        <string>min_value</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="min_value_date_label">
+       <property name="text">
+        <string>min_value_date</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="avg_value_label">
+       <property name="text">
+        <string>avg_value</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="median_value_label">
+       <property name="text">
+        <string>median_value</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>
