@@ -37,9 +37,14 @@ class CurrentWeatherController:
         self.model.data_type = data_type
         self.model.period = period
 
+    def prepare_data_frame(self) -> None:
+        """Method responsible for preparing dataframe"""
+        self.model.prepare_data()
+
     def plot_data(self, figure: Figure, canvas: FigureCanvas) -> Any:
         """Method responsible for generating graph using data from model"""
-        data, data_type = self.model.prepare_data()
+        data = self.model.df
+        data_type = self.model.data_type
 
         figure.clear()
         ax = figure.add_subplot(111)

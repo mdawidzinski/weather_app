@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Dict, Any
 
 class CurrentWeatherModel:
     def __init__(self, data: Path):
@@ -10,6 +10,7 @@ class CurrentWeatherModel:
         self.graph = ""
         self.data_type = ""
         self.period = ""
+        self.df = None
 
     def get_api_data(self) -> Dict[str, Any]:
         """Method responsible for retrieving data from API"""
@@ -22,7 +23,7 @@ class CurrentWeatherModel:
         weather_data = pd.read_excel(self.data)
         return weather_data
 
-    def prepare_data(self) -> Tuple[pd.DataFrame, str]:
+    def prepare_data(self) -> None:
         """Method responsible for preparing data for the graph"""
         weather_data = self.get_excel_data()
 
@@ -33,4 +34,4 @@ class CurrentWeatherModel:
 
         filtered_data = weather_data[weather_data['Date'].between(first_day_of_last_month, last_day)]
 
-        return filtered_data, self.data_type
+        self.df = filtered_data

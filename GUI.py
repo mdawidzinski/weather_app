@@ -83,6 +83,7 @@ class WeatherAppGui(QMainWindow):
         graph, data_type, period = self.get_graph_data()
 
         self.controller.set_gui_data(graph, data_type, period)
+        self.controller.prepare_data_frame()
 
         self.controller.plot_data(self.figure, self.canvas)
 
