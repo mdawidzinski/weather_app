@@ -1,7 +1,8 @@
 import requests
 import pandas as pd
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Tuple
+
 
 class CurrentWeatherModel:
     def __init__(self, data: Path):
@@ -35,3 +36,14 @@ class CurrentWeatherModel:
         filtered_data = weather_data[weather_data['Date'].between(first_day_of_last_month, last_day)]
 
         self.df = filtered_data
+
+    def find_max_value_and_date(self) -> Tuple[str, str]:
+        """Method responsible for searching max value in dataframe along with date"""
+        max_value_index = self.df[self.data_type].idxmax()
+        data_max_value = self.df.loc[max_value_index]
+
+        max_value = data_max_value[self.data_type]
+        max_value_date = data_max_value["Date"]
+        max_value_date = max_value_date.date()
+
+        return max_value, max_value_date
