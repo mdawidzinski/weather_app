@@ -47,3 +47,15 @@ class CurrentWeatherModel:
         max_value_date = max_value_date.date()
 
         return max_value, max_value_date
+
+    def find_min_value_and_date(self) -> Tuple[str, str]:
+        """Method responsible for searching min value in dataframe along with date"""
+        min_value_index = self.df[self.data_type].idxmin()
+        data_min_value = self.df.loc[min_value_index]
+
+        min_value = data_min_value[self.data_type]
+        min_value_date = data_min_value["Date"]
+        min_value_date = min_value_date.date()
+
+        return min_value, min_value_date
+
