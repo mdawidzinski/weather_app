@@ -59,3 +59,10 @@ class CurrentWeatherModel:
 
         return min_value, min_value_date
 
+    def calculate_average(self) -> float:
+        """Method responsible for calculating average value"""
+        average_value = self.df[self.data_type].mean()
+        rounded_average = round(average_value, 2)
+
+        return rounded_average
+
