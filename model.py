@@ -67,7 +67,7 @@ class CurrentWeatherModel:
         return rounded_average
 
     def calculate_median(self) -> float:
-        """Method responsible for calculating average value"""
+        """Method responsible for calculating median value"""
         median_value = self.df[self.data_type].median()
         rounded_median = round(median_value, 2)
 
