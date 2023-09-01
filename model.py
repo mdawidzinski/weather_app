@@ -3,6 +3,8 @@ import pandas as pd
 from pathlib import Path
 from typing import Dict, Any, Tuple
 
+# TODO add try/except
+
 
 class CurrentWeatherModel:
     def __init__(self, data: Path):
@@ -46,7 +48,7 @@ class CurrentWeatherModel:
         max_value_date = data_max_value["Date"]
         max_value_date = max_value_date.date()
 
-        return max_value, max_value_date
+        return max_value, str(max_value_date)
 
     def find_min_value_and_date(self) -> Tuple[str, str]:
         """Method responsible for searching min value in dataframe along with date"""
@@ -57,8 +59,7 @@ class CurrentWeatherModel:
         min_value_date = data_min_value["Date"]
         min_value_date = min_value_date.date()
 
-        return min_value, min_value_date
-
+        return min_value, str(min_value_date)
     def calculate_average(self) -> float:
         """Method responsible for calculating average value"""
         average_value = self.df[self.data_type].mean()
@@ -72,5 +73,3 @@ class CurrentWeatherModel:
         rounded_median = round(median_value, 2)
 
         return rounded_median
-
-

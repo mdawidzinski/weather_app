@@ -6,6 +6,9 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from typing import Tuple
 
+# TODO: symbol list
+# TODO: days without rain
+
 
 class WeatherAppGui(QMainWindow):
     """GUI window for the YouTube downloader application."""
@@ -50,6 +53,17 @@ class WeatherAppGui(QMainWindow):
         self.date_label.setText(today)
         self.time_label.setText(current_time.toString("hh:mm:ss"))
 
+    def update_labels_with_calculated_values(self) -> None:
+        """Method responsible for updating labels with calculated data"""
+        calculated_values = self.controller.get_calculated_values()
+
+        self.max_value_label.setText(f"Max {calculated_values[0]}: {calculated_values[1]}")
+        self.max_value_date_label.setText(f"Date: {calculated_values[2]}")
+        self.min_value_label.setText(f"Min {calculated_values[0]}: {calculated_values[3]}")
+        self.min_value_date_label.setText(f"Date: {calculated_values[4]}")
+        self.avg_value_label.setText(f"Average: {calculated_values[5]}")
+        self.median_value_label.setText(f"Median: {calculated_values[6]}")
+
     def zoom_in(self) -> None:
         """Allows zoom in graph"""
         ax = self.figure.gca()
@@ -86,6 +100,7 @@ class WeatherAppGui(QMainWindow):
         self.controller.prepare_data_frame()
 
         self.controller.plot_data(self.figure, self.canvas)
+        self.update_labels_with_calculated_values()
 
         self.zoom_out_b.setEnabled(True)
         self.zoom_in_b.setEnabled(True)
