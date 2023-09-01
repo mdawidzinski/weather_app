@@ -252,42 +252,42 @@
      <item>
       <widget class="QLabel" name="max_value_label">
        <property name="text">
-        <string>max_value</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="max_value_date_label">
        <property name="text">
-        <string>max_value_date</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="min_value_label">
        <property name="text">
-        <string>min_value</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="min_value_date_label">
        <property name="text">
-        <string>min_value_date</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="avg_value_label">
        <property name="text">
-        <string>avg_value</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="median_value_label">
        <property name="text">
-        <string>median_value</string>
+        <string/>
        </property>
       </widget>
      </item>
