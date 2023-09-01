@@ -6,7 +6,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from typing import Tuple
 
-# TODO: symbol list
 # TODO: days without rain
 
 
@@ -17,6 +16,14 @@ class WeatherAppGui(QMainWindow):
         self.controller = controller
 
         uic.loadUi("weather_app.ui", self)
+
+        self.symbols = {
+            "Temperature": "\u2103",
+            "Precipitation": "mm",
+            "Wind speed": "km/h",
+            "Pressure": "hPa",
+            "Humidity": "%"
+        }
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_date_time)
@@ -38,12 +45,11 @@ class WeatherAppGui(QMainWindow):
         """Update GUI with the data from API"""
         city, temperature, pressure, humidity, wind = self.controller.prepare_weather_data()
 
-        symbol = "\u00b0"
         self.city_label.setText(city)
-        self.temperature_label.setText(f"Temperature: {temperature}{symbol}C")
-        self.pressure_label.setText(f"Pressure: {pressure} hPa")
-        self.humidity_label.setText(f"Humidity: {humidity}%")
-        self.wind_label.setText(f"Wind: {wind} km/h")
+        self.temperature_label.setText(f"Temperature: {temperature} {self.symbols['Temperature']}")
+        self.pressure_label.setText(f"Pressure: {pressure} {self.symbols['Pressure']}")
+        self.humidity_label.setText(f"Humidity: {humidity} {self.symbols['Humidity']}")
+        self.wind_label.setText(f"Wind: {wind} {self.symbols['Wind speed']}")
 
     def update_date_time(self) -> None:
         """Update GUI with current date and time"""
@@ -56,13 +62,16 @@ class WeatherAppGui(QMainWindow):
     def update_labels_with_calculated_values(self) -> None:
         """Method responsible for updating labels with calculated data"""
         calculated_values = self.controller.get_calculated_values()
+        data_value = calculated_values[0]
 
-        self.max_value_label.setText(f"Max {calculated_values[0]}: {calculated_values[1]}")
+        symbol = self.symbols[data_value]
+
+        self.max_value_label.setText(f"Max {data_value}: {calculated_values[1]} {symbol}")
         self.max_value_date_label.setText(f"Date: {calculated_values[2]}")
-        self.min_value_label.setText(f"Min {calculated_values[0]}: {calculated_values[3]}")
+        self.min_value_label.setText(f"Min {data_value}: {calculated_values[3]} {symbol}")
         self.min_value_date_label.setText(f"Date: {calculated_values[4]}")
-        self.avg_value_label.setText(f"Average: {calculated_values[5]}")
-        self.median_value_label.setText(f"Median: {calculated_values[6]}")
+        self.avg_value_label.setText(f"Average: {calculated_values[5]} {symbol}")
+        self.median_value_label.setText(f"Median: {calculated_values[6]} {symbol}")
 
     def zoom_in(self) -> None:
         """Allows zoom in graph"""
